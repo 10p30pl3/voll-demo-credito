@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: voll-demo-credito
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: 22.16.0
+      - key: VOLL_API_KEY
+        sync: false
