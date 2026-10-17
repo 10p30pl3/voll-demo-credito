@@ -1,6 +1,6 @@
 # Voll Crédito
 
-Demo da jornada de financiamento com layout do delivery: ficha do cliente no topo, nove etapas na vertical e histórico lateral.
+Demo da jornada de financiamento com layout do delivery: ficha do cliente fixa no topo, nove etapas na vertical e histórico lateral.
 
 Todas as etapas têm botões. Os passos 4 e 5 acionam o Voll Workflows para o telefone editável do cliente. As outras etapas avançam a demonstração local.
 
@@ -30,7 +30,7 @@ O navegador faz `POST /api/trigger`. O servidor valida e encaminha ao gatilho `2
 
 No passo 5, `action` é `VOICE`. O destino `1007` representa o cliente nos dois passos. `try` avança no WhatsApp; a voz usa a tentativa atual, com mínimo 1.
 
-A chave vem exclusivamente de `process.env.VOLL_API_KEY`. Nunca é incluída no HTML nem no repositório. O painel Configuração mostra o último body e o resultado HTTP.
+A chave vem exclusivamente de `process.env.VOLL_API_KEY`. Nunca é incluída no HTML nem no repositório. O histórico lateral registra os acionamentos e seus resultados.
 
 ## Render
 
