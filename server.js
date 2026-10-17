@@ -2,10 +2,14 @@ import http from 'node:http';
 import { readFile } from 'node:fs/promises';
 const TRIGGER_URL='https://produtos.vollsc.com/api/triggers/activate/22a4895d-bba7-4b8b-8ad0-13a154ebeb2e';
 const html=await readFile(new URL('./index.html',import.meta.url));
+const favicon=await readFile(new URL('./favicon.svg',import.meta.url));
+const logo=await readFile(new URL('./voll-credito-logo.svg',import.meta.url));
 const json=(res,status,body)=>{res.writeHead(status,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'});res.end(JSON.stringify(body));};
 async function handler(req,res){
  const path=new URL(req.url,'http://localhost').pathname;
  if(req.method==='GET'&&path==='/'){res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store'});return res.end(html);}
+ if(req.method==='GET'&&(path==='/favicon.svg'||path==='/voll-credito-logo.svg')){res.writeHead(200,{'Content-Type':'image/svg+xml; charset=utf-8','Cache-Control':'public, max-age=3600'});return res.end(path==='/favicon.svg'?favicon:logo);}
+ if(req.method==='GET'&&path==='/favicon.ico'){res.writeHead(302,{Location:'/favicon.svg'});return res.end();}
  if(req.method==='GET'&&path==='/health')return json(res,200,{ok:true});
  if(path!=='/api/trigger')return json(res,404,{error:'Não encontrado.'});
  if(req.method!=='POST'){res.setHeader('Allow','POST');return json(res,405,{error:'Método inválido.'});}
