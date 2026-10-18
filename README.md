@@ -2,10 +2,11 @@
 
 Demo da jornada de financiamento com layout do delivery: ficha do cliente fixa no topo, nove etapas na vertical e histórico lateral.
 
-Todas as etapas têm botões. Os passos 4 e 5 acionam o Voll Workflows para o telefone editável do cliente. As outras etapas avançam a demonstração local.
+Todas as etapas têm botões. Os passos 4, 5 e 7 acionam o Voll Workflows para o telefone editável do cliente. As outras etapas avançam a demonstração local.
 
 - Passo 4: `WHATSAPP`, até três tentativas por sessão.
 - Passo 5: `VOICE`, quando necessário.
+- Passo 7: `WHATSAPP`, com `information: "credito aprovado"` e `try: 1`.
 - Botões bloqueados durante o processamento. O sucesso confirma aceite da API, não a entrega da mensagem ou atendimento da ligação.
 
 ## Executar
@@ -33,7 +34,8 @@ O navegador faz `POST /api/trigger`. O servidor valida e encaminha ao gatilho `2
   "name": "Ricardo Martins",
   "company": "Banco Honda",
   "product": "Honda HRV",
-  "information": "Comprovante de renda"
+  "information": "Comprovante de renda",
+  "step": 4
 }
 ```
 
@@ -53,4 +55,4 @@ npm run check
 
 Este repositório contém a versão portátil em Node.js, com a mesma página e comportamento da demo publicada no ChatGPT Sites, para execução local ou no Render como no delivery.
 
-Os campos `name`, `company`, `product` e `information` acompanham tanto o WhatsApp quanto a voz. Nome, banco, veículo e pendência são editáveis no cabeçalho. A edição do banco e da pendência também atualiza o resumo da jornada.
+Os campos `name`, `company`, `product` e `information` acompanham tanto o WhatsApp quanto a voz. O campo numérico `step` identifica a etapa acionada: 4, 5 ou 7. Nome, banco, veículo e pendência são editáveis no cabeçalho. A edição do banco e da pendência também atualiza o resumo da jornada.
