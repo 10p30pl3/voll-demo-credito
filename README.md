@@ -25,7 +25,16 @@ Abra http://localhost:3000. O comando lê o `.env` automaticamente. Em hospedage
 O navegador faz `POST /api/trigger`. O servidor valida e encaminha ao gatilho `22a4895d-bba7-4b8b-8ad0-13a154ebeb2e`, em `produtos.vollsc.com`, com o body do delivery:
 
 ```json
-{"action":"WHATSAPP","whatsapp":"5511999999999","try":1,"to":"1007"}
+{
+  "action": "WHATSAPP",
+  "whatsapp": "5511999999999",
+  "try": 1,
+  "to": "1007",
+  "name": "Ricardo Martins",
+  "company": "Banco Honda",
+  "product": "Honda HRV",
+  "information": "Comprovante de renda"
+}
 ```
 
 No passo 5, `action` é `VOICE`. O destino `1007` representa o cliente nos dois passos. `try` avança no WhatsApp; a voz usa a tentativa atual, com mínimo 1.
@@ -43,3 +52,5 @@ npm run check
 ```
 
 Este repositório contém a versão portátil em Node.js, com a mesma página e comportamento da demo publicada no ChatGPT Sites, para execução local ou no Render como no delivery.
+
+Os campos `name`, `company`, `product` e `information` acompanham tanto o WhatsApp quanto a voz. Nome, banco, veículo e pendência são editáveis no cabeçalho. A edição do banco e da pendência também atualiza o resumo da jornada.
