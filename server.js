@@ -15,7 +15,7 @@ async function handler(req,res){
  if(req.method!=='POST'){res.setHeader('Allow','POST');return json(res,405,{error:'Método inválido.'});}
  if(req.headers.origin){try{if(new URL(req.headers.origin).host!==req.headers.host)return json(res,403,{error:'Origem inválida.'});}catch{return json(res,403,{error:'Origem inválida.'});}}
  let body;try{let data='';let bytes=0;for await(const chunk of req){bytes+=chunk.length;if(bytes>16384)return json(res,413,{error:'Body muito grande.'});data+=chunk;}body=JSON.parse(data);}catch{return json(res,400,{error:'Body inválido.'});}
- if(!body||!['WHATSAPP','VOICE'].includes(body.action)||typeof body.whatsapp!=='string'||!/^\d{8,15}$/.test(body.whatsapp)||!Number.isInteger(body.try)||body.try<1||body.try>3||body.to!=='1007')return json(res,400,{error:'Dados de acionamento inválidos.'});
+ if(!body||!['WHATSAPP','VOICE'].includes(body.action)||typeof body.whatsapp!=='string'||!/^\d{8,15}$/.test(body.whatsapp)||!Number.isInteger(body.try)||body.try<1||body.try>3||body.to!==(body.action==='VOICE'?'1011':'1007'))return json(res,400,{error:'Dados de acionamento inválidos.'});
  if(![4,5,7].includes(body.step)||body.action!==(body.step===5?'VOICE':'WHATSAPP'))return json(res,400,{error:'Etapa ou ação inválida.'});
  const fields={name:200,company:200,product:200,information:2000};
  if(Object.entries(fields).some(([key,max])=>typeof body[key]!=='string'||!body[key].trim()||body[key].trim().length>max))return json(res,400,{error:'Preencha nome, banco, produto e pendência.'});

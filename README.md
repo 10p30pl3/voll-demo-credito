@@ -39,7 +39,7 @@ O navegador faz `POST /api/trigger`. O servidor valida e encaminha ao gatilho `2
 }
 ```
 
-No passo 5, `action` é `VOICE`. O destino `1007` representa o cliente nos dois passos. `try` avança no WhatsApp; a voz usa a tentativa atual, com mínimo 1.
+No passo 5, `action` é `VOICE` e `to` é `"1011"`. Nos passos 4 e 7 (WhatsApp), `to` permanece `"1007"`. `try` avança no WhatsApp; a voz usa a tentativa atual, com mínimo 1.
 
 A chave vem exclusivamente de `process.env.VOLL_API_KEY`. Nunca é incluída no HTML nem no repositório. O histórico lateral registra os acionamentos e seus resultados.
 
